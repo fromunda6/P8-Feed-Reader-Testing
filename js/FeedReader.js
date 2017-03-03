@@ -70,7 +70,7 @@ function init() {
                      container.append(entryTemplate(entry));
                  });
                  console.log(container.length);
-                 console.log(container.slice(-1));
+                 console.log(entries);
                  console.log(container.html());
                  if (cb) {
                      cb();

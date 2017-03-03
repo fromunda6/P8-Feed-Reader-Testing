@@ -9,13 +9,17 @@
  * to ensure they don't run until the DOM is ready.
  */
 
- //"describe" method used as a container for test methods related to a discrete section
- //of functionality
+//Jasmine functions:
 
- // "it" accepts a string(spec title) and a function(the spec or test)
- // and computes a boolean value for each of any number of "expect" statements,
- // an assertions in the form of a 2-part method invocation taking an actual
- // value(expect()) and a matcher value(toBe() is just one example)
+     // "describe" method used as a container for test methods related to a discrete section
+     // of functionality.  No special functionality other than its string parameter being
+     // bound to an HTML element
+
+     // "it" accepts a string(spec title) and a function(the spec or test)
+     // and computes a boolean value for each of any number of "expect" statements,
+     // an assertions in the form of a 2-part method invocation taking an actual
+     // value(expect()) and a matcher value(toBe() is just one of many available
+     // matcher functions)
 
 $(function() {
     describe('RSS Feeds', function() {
@@ -56,7 +60,7 @@ $(function() {
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
-        it('should be hidden on load', function() {
+        it('should be hidden on load/by default', function() {
 
             var htmlBody = $(document.body);
             var bodyClassName = htmlBody.attr('class');
@@ -105,7 +109,6 @@ $(function() {
          */
     describe('Initial Entries Container', function() {
         var container = $('.feed');
-        var entry = $('.entry');
 
         beforeEach(function(done) {
             loadFeed(0, function() {
@@ -113,17 +116,36 @@ $(function() {
             });
         });
 
+        //tests only that html is not empty, not that it in fact contains an entry
         it('should contain at least 1 entry', function(done) {
             expect(container.html()).not.toBe('');
+            //further
+            expect(container.length).not.toBe(0);
             done();
         });
     });
 
     // TODO: Write a new test suite named "New Feed Selection"
-    describe('New Feed Selection', function() {
-    })
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+    describe('New Feed Selection', function() {
+        var container = $('.feed');
+
+        beforeEach(function(done) {
+            loadFeed(0, function() {
+                var feed1Text = container.slice(-1).innerHTML;
+                done();
+            });
+            loadFeed(1, function() {
+                var feed2Text = container.slice(-1).innerHTML;
+            });
+        });
+
+        it('should change the content', function(done) {
+            expect(feed1Text).not.toBe(feed2Text);
+            done();
+        });
+    });
 }());

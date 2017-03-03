@@ -52,6 +52,7 @@ function init() {
        success: function (result, status){
 
                  var container = $('.feed'),
+                     containerLen = container.length,
                      title = $('.header-title'),
                      entries = result.feed.entries,
                      entriesLen = entries.length,
@@ -68,6 +69,8 @@ function init() {
                  entries.forEach(function(entry) {
                      container.append(entryTemplate(entry));
                  });
+                 console.log(container.length);
+                 console.log(container.slice(-1));
                  console.log(container.html());
                  if (cb) {
                      cb();

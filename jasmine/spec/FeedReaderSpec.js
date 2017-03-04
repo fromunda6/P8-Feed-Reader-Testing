@@ -51,12 +51,12 @@ $(function() {
         //declare a constant(as opposed to a variable) which cannot be reassigned
         const relevantClasses = document.body.classList;
 
-         //testing default state of DOM menu visibility
+        //testing default state of DOM menu visibility
         it('should be hidden on load/by default', function() {
             expect(relevantClasses).toContain('menu-hidden');
         });
 
-     //ensure the menu changes visibility-state when clicked
+        //ensure the menu changes visibility-state when clicked
         it('should become visible when first clicked', function() {
             var menuIcon = $(".menu-icon-link");
 
@@ -112,7 +112,7 @@ $(function() {
             loadFeed(0, function() {
                 var feed1Text = container[0].innerText;
                 testArray.push(feed1Text);
-            loadFeed(1, done);
+                loadFeed(1, done);
             });
         });
 
